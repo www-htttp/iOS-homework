@@ -1,5 +1,5 @@
 //
-//  HistoryRecordTableViewController.h
+//  JZCHistoryRecordTableViewController.h
 //  Calculate
 //
 //  Created by miracle on 2017/4/18.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryRecordTableViewController : UITableViewController
+@interface JZCHistoryRecordTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *dataArr;
 

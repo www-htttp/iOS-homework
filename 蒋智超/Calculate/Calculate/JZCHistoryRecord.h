@@ -1,5 +1,5 @@
 //
-//  HistoryRecord.h
+//  JZCHistoryRecord.h
 //  Calculate
 //
 //  Created by miracle on 2017/4/18.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HistoryRecord : NSObject
+@interface JZCHistoryRecord : NSObject
 @property (nonatomic, copy) NSString *oneNum;
 @property (nonatomic, copy) NSString *anotherNum;
 @property (nonatomic, copy) NSString *operation;

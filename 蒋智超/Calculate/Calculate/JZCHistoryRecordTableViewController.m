@@ -1,18 +1,18 @@
 //
-//  HistoryRecordTableViewController.m
+//  JZCHistoryRecordTableViewController.m
 //  Calculate
 //
 //  Created by miracle on 2017/4/18.
 //  Copyright © 2017年 miracle. All rights reserved.
 //
 
-#import "HistoryRecordTableViewController.h"
+#import "JZCHistoryRecordTableViewController.h"
 
-@interface HistoryRecordTableViewController ()
+@interface JZCHistoryRecordTableViewController ()
 
 @end
 
-@implementation HistoryRecordTableViewController
+@implementation JZCHistoryRecordTableViewController
 
 
 - (void)viewDidLoad {

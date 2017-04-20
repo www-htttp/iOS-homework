@@ -1,5 +1,5 @@
 //
-//  ZCCalculateTool.h
+//  JZCCalculateTool.h
 //  Calculate
 //
 //  Created by miracle on 2017/4/17.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ZCCalculateTool : NSObject
+@interface JZCCalculateTool : NSObject
 
 @property (nonatomic, strong) NSMutableArray *records;//计算记录
 @property (nonatomic, assign, getter=isCorrected) BOOL correct;//计算成功标志

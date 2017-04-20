@@ -8,8 +8,8 @@
 
 #import "ViewController.h"
 
-#import "ZCCalculateTool.h"
-#import "HistoryRecordTableViewController.h"
+#import "JZCCalculateTool.h"
+#import "JZCHistoryRecordTableViewController.h"
 
 //button tag
 #define kEqual 120
@@ -19,7 +19,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @property (nonatomic, copy) NSString *temStr;//计算式
-@property (nonatomic, strong) ZCCalculateTool *calculateTool;
+@property (nonatomic, strong) JZCCalculateTool *calculateTool;
 @property (nonatomic, copy) NSString *lastResult;//上一次计算的结果
 @end
 
@@ -35,7 +35,7 @@
 }
 
 - (void)moveToHistroyRecord {
-    HistoryRecordTableViewController *recordVC = [[HistoryRecordTableViewController alloc] init];
+    JZCHistoryRecordTableViewController *recordVC = [[JZCHistoryRecordTableViewController alloc] init];
     recordVC.dataArr = self.calculateTool.records;
     [self.navigationController pushViewController:recordVC animated:YES];
 }
@@ -45,7 +45,7 @@
     NSString *title = ((UIButton *)sender).titleLabel.text;
     
     if (tag == kEqual) {
-        ZCCalculateTool *tool = [[ZCCalculateTool alloc] init];
+        JZCCalculateTool *tool = [[JZCCalculateTool alloc] init];
         self.calculateTool = tool;
         NSString *result = @"";
         if (self.temStr) {

@@ -1,16 +1,16 @@
 //
-//  ZCCalculateTool.m
+//  JZCCalculateTool.m
 //  Calculate
 //
 //  Created by miracle on 2017/4/17.
 //  Copyright © 2017年 miracle. All rights reserved.
 //
 
-#import "ZCCalculateTool.h"
-#import "HistoryRecord.h"
+#import "JZCCalculateTool.h"
+#import "JZCHistoryRecord.h"
 #define kEndNum @10000
 
-@interface ZCCalculateTool ()
+@interface JZCCalculateTool ()
 
 @property (nonatomic, strong) NSMutableArray *numStack;//操作数栈
 @property (nonatomic, strong) NSMutableArray *opStack;//操作符栈
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation ZCCalculateTool
+@implementation JZCCalculateTool
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -52,6 +52,7 @@
         switch (c) {
             case '#'://进行计算直到与“#”配对
                 [self separateNumStr];
+                if (self.errorStr) break;
                 
                 while (![[self.opStack lastObject] isEqualToString:@"#"]) {
                     [self baseCalculate];
@@ -69,11 +70,14 @@
                 
             case '('://直接入栈
                 [self separateNumStr];
+                if (self.errorStr) break;
+
                 [self.opStack addObject:charStr];
                 break;
                 
             case ')'://进行计算直到与‘(’配对
                 [self separateNumStr];
+                if (self.errorStr) break;
                 
                 while (![[self.opStack lastObject] isEqualToString:@"("]) {
                     [self baseCalculate];
@@ -93,6 +97,7 @@
             case 'x':
             case '/':
                 [self separateNumStr];
+                if (self.errorStr) break;
                 
                 //优先级比栈顶低，进行计算直到比栈顶优先级高或者遇到‘(’
                 if (opPriorityNum.integerValue >= ((NSNumber *)self.opPriority[[self.opStack lastObject]]).integerValue) {
@@ -131,6 +136,7 @@
         return self.errorStr;
     } else {
         self.correct = YES;
+        self.outputStr = [self.outputStr jzcChangeDoubleValueStringToInteger];
         return self.outputStr;
     }
 }
@@ -143,7 +149,7 @@
     } else {
         NSString *resultNum = [self calculateOneNum:self.numStack[count - 2] withAnother:self.numStack[count - 1] byOperation:[self.opStack lastObject]];
         
-        HistoryRecord *re = [[HistoryRecord alloc] initWithOneNum:self.numStack[count - 2] another:self.numStack[count - 1] operation:[self.opStack lastObject] result:resultNum];
+        JZCHistoryRecord *re = [[JZCHistoryRecord alloc] initWithOneNum:self.numStack[count - 2] another:self.numStack[count - 1] operation:[self.opStack lastObject] result:resultNum];
         [self.records addObject:re.record];
 
         if (![resultNum isEqualToString:@"error"]) {
@@ -159,9 +165,21 @@
 
 #pragma mark - 分离操作数
 - (void)separateNumStr {
-    if (self.numStr) {
+    if (!self.numStr) return;
+    
+    int dotCount = 0;
+    for (int i = 0; i < self.numStr.length; i++) {
+        char c = [self.numStr characterAtIndex:i];
+        if (c == '.') {
+            dotCount++;
+        }
+    }
+    
+    if (dotCount < 2) {
         [self.numStack addObject:self.numStr];
         self.numStr = nil;
+    } else {
+        self.errorStr = @"错误";
     }
 
 }
